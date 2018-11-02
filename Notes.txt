@@ -1,0 +1,107 @@
+********* MYSQl Connection ***************
+
+Host- pcf-db.citu61jimsxu.us-west-2.rds.amazonaws.com​
+port - 3306 
+username - admin
+Password - TCS#1234
+
+***********************
+
+/*create table MyDatabase.Mule_ErrorAudit(flow_name varchar(100),execution_time varchar(40),
+execution_id varchar(100),source_system varchar(100),target_system varchar(100),
+error_message text(65534),error_payload text(65534));*/
+         
+
+/*create table MyDatabase.Mule_Audit(flow_name varchar(100),execution_time varchar(40),
+execution_id varchar(100),source_system varchar(100),target_system varchar(100),
+Source_count varchar(100),Target_count varchar(100));*/
+          
+*********************
+Important Functions:::>>>
+******************************
+Count : #[payload.size()]
+Random-Id-generator : #[org.mule.util.UUID.getUUID()]
+Exception FlowName : #[exception.event.flowConstruct.name]
+SysDate : #[server.dateTime]
+fun toUser(user) = {firstName: user.name, lastName: user.lastName}
+var toUser = (user) -> {firstName: user.name, lastName: user.lastName}
+Replace fx():: payload=payload.replace('<none>','');
+input : {
+  First: payload.Name[0 to 6]  output =="First": "Manjeet"
+  last: payload.Name[8 to 12]  output== "last": "singh"
+}---
+input : <product id="1" type1="tv">
+  <brand>Samsung</brand>
+</product>
+
+id:payload.product.@id --displays ID value if ID attribute with xml
+attributes: payload.product.@--display all attribute within xml 
+
+users: payload.users.*name[?($ == "Mariano")]
+ users @(name:payload.user.name): "DataWeave"---xml attribute
+  users @((payload.user)): "DataWeave"
+  books: payload.items.*item map
+  entry: using (firstName = "Annie", lastName = "Point")
+Groovy Functions:>>>
+
+def folder = new File('C:/Users/demo_user1/Desktop/Mule.csv')
+if(!folder.exists()) 
+{
+  message.setInvocationProperty('Flag', 'true')
+  return payload
+}
+else
+{
+  return payload
+}
+
+
+Expression Functions:>>>
+
+recordVars.File=new File('C:/Users/demo_user1/Desktop/Mule.csv');
+if(recordVars.File.exists())
+{
+ recordVars.Flag = 'false'
+}
+else
+{
+ recordVars.Flag = 'true'
+}
+
+----DATE--
+{
+  year: myDate.year,
+  month: myDate.month,
+  day: myDate.day,
+  hour: myDate.hour,
+  minutes: myDate.minutes,
+  seconds: myDate.seconds,
+  milliseconds: myDate.milliseconds,
+  nanoseconds: myDate.nanoseconds,
+  quarter: myDate.quarter,
+  dayOfWeek: myDate.dayOfWeek,
+  dayOfYear: myDate.dayOfYear,
+  offsetSeconds: myDate.offsetSeconds
+}
+
+formattedDate: |2003-10-01T23:57:59| as String {format: "YYYY-MM-dd"}
+
+-----
+
+fun myfun() = do {
+    var name = "DataWeave"
+    ---
+    name
+}
+---
+{ result: myfun() }
+-------------------
+%dw 2.0
+output application/json
+var myVar = do {
+    var name = "DataWeave"
+    ---
+    name
+}
+---
+{ result: myVar }
