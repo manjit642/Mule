@@ -5,6 +5,8 @@ Set Up Git:
 git config --global user.name "Your Name"
 git config --global user.email "youremail@domain.com"
 
+git clone https://github.com/manjit642/Mule.git--    clone browser repository in local
+
 other commands
 git clone (url)
 git add (file names)
